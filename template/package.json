@@ -1,0 +1,57 @@
+{
+	"private": true,
+	"name": "un-maps",
+	"version": "0.0.0",
+	"license": "MIT",
+	"scripts": {
+		"start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+		"build": "preact build --template src/template.html --service-worker false",
+		"serve": "preact build && preact serve",
+		"dev": "preact watch --template src/template.html",
+		"lint": "eslint src",
+		"create:stats": "npm run build -- -p false --json",
+		"preanalyzer": "npm run create:stats",
+		"analyzer": "webpack-bundle-analyzer ./stats.json"
+	},
+	"eslintConfig": {
+		"extends": "eslint-config-synacor",
+		"rules": {
+			"react/jsx-no-bind": [
+				true,
+				{
+					"ignoreRefs": false,
+					"allowArrowFunctions": true,
+					"allowFunctions": false,
+					"allowBind": true
+				}
+			]
+		}
+	},
+	"eslintIgnore": [
+		"build/*"
+	],
+	"devDependencies": {
+		"copy-webpack-plugin": "^4.5.0",
+		"eslint": "^4.5.0",
+		"eslint-config-synacor": "^1.1.0",
+		"if-env": "^1.0.0",
+		"preact-cli": "^2.2.1",
+		"preact-cli-plugin-critical-css": "^0.1.0",
+		"webpack-bundle-analyzer": "^2.11.1"
+	},
+	"dependencies": {
+		"classnames": "^2.2.5",
+		"preact": "^8.2.1",
+		"preact-compat": "^3.17.0",
+		"tiny-throttle": "^1.0.1",
+		"unistore": "^3.0.4"
+	},
+	"moduleRoots": [
+		"src"
+	],
+	"browserslist": [
+		"> 2%",
+		"IE >= 11",
+		"last 2 versions"
+	]
+}
